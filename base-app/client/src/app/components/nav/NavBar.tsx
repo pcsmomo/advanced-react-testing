@@ -1,10 +1,10 @@
-import { Box, Button, Flex, HStack, Icon, Link } from "@chakra-ui/react";
-import { GiGuitarBassHead } from "react-icons/gi";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { Box, Button, Flex, HStack, Icon, Link } from '@chakra-ui/react';
+import { GiGuitarBassHead } from 'react-icons/gi';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 
-import { useUser } from "../../../features/auth/hooks/useUser";
-import { signOut } from "../../../features/auth/redux/authSlice";
-import { useAppDispatch } from "../../store/hooks";
+import { useUser } from '../../../features/auth/hooks/useUser';
+import { signOut } from '../../../features/auth/redux/authSlice';
+import { useAppDispatch } from '../../store/hooks';
 
 const NavLink = ({
   to,
@@ -20,8 +20,8 @@ const NavLink = ({
     rounded="md"
     color="slate.200"
     _hover={{
-      textDecoration: "none",
-      color: "gray.500",
+      textDecoration: 'none',
+      color: 'gray.500',
     }}
     to={to}
   >
@@ -35,12 +35,12 @@ export function NavBar(): React.ReactElement {
   const history = useHistory();
 
   const Links = [
-    { display: "Shows", route: "shows" },
-    { display: "My Account", route: user ? "profile" : "signIn" },
+    { display: 'Shows', route: 'shows' },
+    { display: 'My Account', route: user ? 'profile' : 'signIn' },
   ];
 
   return (
-    <Box bg="rgba(60, 60, 60, 0.6)" px={4} style={{ fontFamily: "Unica One" }}>
+    <Box bg="rgba(60, 60, 60, 0.6)" px={4} style={{ fontFamily: 'Unica One' }}>
       <Flex h={16} alignItems="center" justify="space-between">
         <HStack spacing={8} alignItems="center">
           <NavLink to="/">
@@ -63,7 +63,7 @@ export function NavBar(): React.ReactElement {
               </Button>
             </>
           ) : (
-            <Button bgColor="gray.800" onClick={() => history.push("/signin")}>
+            <Button bgColor="gray.800" onClick={() => history.push('/signin')}>
               Sign in
             </Button>
           )}

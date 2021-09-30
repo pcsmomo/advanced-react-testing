@@ -7,14 +7,14 @@ import {
   ListItem,
   Stack,
   Text,
-} from "@chakra-ui/react";
-import React from "react";
-import { useHistory } from "react-router";
+} from '@chakra-ui/react';
+import React from 'react';
+import { useHistory } from 'react-router';
 
-import { LoadingSpinner } from "../../../app/components/LoadingSpinner";
-import { QueryError } from "../../../app/components/QueryError";
-import { formatDate } from "../../../app/utils";
-import { useGetAllShowsQuery } from "../redux/showApi";
+import { LoadingSpinner } from '../../../app/components/LoadingSpinner';
+import { QueryError } from '../../../app/components/QueryError';
+import { formatDate } from '../../../app/utils';
+import { useGetAllShowsQuery } from '../redux/showApi';
 
 const oneMinute = 60000;
 

@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
   HoldReservation,
   PurchaseReservation,
   Reservation,
-} from "../../../../../shared/types";
-import { RootState } from "../../../app/store";
-import { TicketAction, TransactionStatus } from "../types";
+} from '../../../../../shared/types';
+import { RootState } from '../../../app/store';
+import { TicketAction, TransactionStatus } from '../types';
 
 export type ErrorPayload = { error: string };
 export type ReleasePayload = { reservation: HoldReservation; reason: string };
@@ -23,7 +23,7 @@ export type TicketState = {
 
 const createTicketSlice = (initialState: TicketState) =>
   createSlice({
-    name: "tickets",
+    name: 'tickets',
     initialState,
     reducers: {
       holdTickets: (state, action: PayloadAction<Reservation>) => {

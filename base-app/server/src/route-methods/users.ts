@@ -25,7 +25,7 @@ function removePasswordandAddToken(user: AuthUser): User {
 
 export async function getById(
   req: AuthRequest,
-  res: Response,
+  res: Response
 ): Promise<Response> {
   try {
     if (!req.auth) throw new Error('Cannot get user without login');
@@ -68,7 +68,7 @@ export async function create(req: Request, res: Response): Promise<Response> {
 
 export async function remove(
   req: AuthRequest,
-  res: Response,
+  res: Response
 ): Promise<Response> {
   try {
     const { id } = req.params;
@@ -81,7 +81,7 @@ export async function remove(
 
 export async function update(
   req: AuthRequest,
-  res: Response,
+  res: Response
 ): Promise<Response> {
   try {
     const { id } = req.params;
@@ -112,7 +112,7 @@ export async function auth(req: Request, res: Response): Promise<Response> {
       user.email === email && passwordIsValid(password, user)
         ? user
         : foundUser,
-    null,
+    null
   );
 
   if (!validUser) return res.status(400).json({ message: 'Invalid login' });

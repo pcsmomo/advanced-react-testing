@@ -17,29 +17,29 @@ export async function getReservations(): Promise<Array<Reservation>> {
 }
 
 export async function writeReservations(
-  newReservationsArray: Array<Reservation>,
+  newReservationsArray: Array<Reservation>
 ): Promise<void> {
   return writeJSONToFile<Reservation>(
     filenames.reservations,
-    newReservationsArray,
+    newReservationsArray
   );
 }
 
 export async function getReservationsByShowId(
-  showId: number,
+  showId: number
 ): Promise<Array<Reservation>> {
   const reservations = await getReservations();
   return reservations.filter((r) => r.showId === showId);
 }
 
 export async function getReservationById(
-  id: number,
+  id: number
 ): Promise<Reservation | null> {
   try {
     const reservation = await getItemById<Reservation>(
       id,
       filenames.reservations,
-      'reservation',
+      'reservation'
     );
     return reservation;
   } catch (e) {

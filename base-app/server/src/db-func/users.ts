@@ -38,7 +38,7 @@ export async function addUser(newUserData: NewAuthUser): Promise<AuthUser> {
 
 export async function updateUser(
   userId: number,
-  patch: Operation[],
+  patch: Operation[]
 ): Promise<AuthUser> {
   return updateItem<AuthUser>(userId, filenames.users, patch);
 }

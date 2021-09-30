@@ -1,12 +1,12 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { Band } from "../../../../../shared/types";
-import { baseUrl } from "../../../app/axios/constants";
+import { Band } from '../../../../../shared/types';
+import { baseUrl } from '../../../app/axios/constants';
 
 export const bandUrl = `${baseUrl}/bands`;
 
 export const bandApi = createApi({
-  reducerPath: "bandApi",
+  reducerPath: 'bandApi',
   baseQuery: fetchBaseQuery({ baseUrl: bandUrl }),
   endpoints: (builder) => ({
     getBandById: builder.query<Band, string>({

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ToastOptions } from "../types";
+import { ToastOptions } from '../types';
 
 export type ToastState = {
   toastOptions: ToastOptions | null;
@@ -9,7 +9,7 @@ export type ToastState = {
 
 const createToastSlice = (initialState: ToastState) =>
   createSlice({
-    name: "toast",
+    name: 'toast',
     initialState,
     reducers: {
       showToast(state, action: PayloadAction<ToastOptions>) {

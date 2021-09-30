@@ -1,10 +1,10 @@
 // adapted from https://redux-saga.js.org/docs/advanced/NonBlockingCalls/
-import { SagaIterator } from "redux-saga";
-import { call, cancel, cancelled, fork, put, take } from "redux-saga/effects";
+import { SagaIterator } from 'redux-saga';
+import { call, cancel, cancelled, fork, put, take } from 'redux-saga/effects';
 
-import { showToast } from "../../toast/redux/toastSlice";
-import { authServerCall } from "../api";
-import { LoggedInUser, SignInDetails } from "../types";
+import { showToast } from '../../toast/redux/toastSlice';
+import { authServerCall } from '../api';
+import { LoggedInUser, SignInDetails } from '../types';
 import {
   cancelSignIn,
   endSignIn,
@@ -12,7 +12,7 @@ import {
   signInRequest,
   signOut,
   startSignIn,
-} from "./authSlice";
+} from './authSlice';
 
 export function* authenticateUser(payload: SignInDetails): SagaIterator {
   try {
@@ -22,20 +22,20 @@ export function* authenticateUser(payload: SignInDetails): SagaIterator {
     yield put(
       showToast({
         title: `Signed in as ${response.email}`,
-        status: "info",
+        status: 'info',
       })
     );
   } catch (error) {
-    const action = payload.action === "signIn" ? "in" : "up";
+    const action = payload.action === 'signIn' ? 'in' : 'up';
     yield put(
       showToast({
         title: `Sign ${action} failed: ${error.message}`,
-        status: "warning",
+        status: 'warning',
       })
     );
   } finally {
     if (yield cancelled()) {
-      yield put(showToast({ title: "Sign in canceled", status: "warning" }));
+      yield put(showToast({ title: 'Sign in canceled', status: 'warning' }));
       yield put(signOut());
     }
     yield put(endSignIn());

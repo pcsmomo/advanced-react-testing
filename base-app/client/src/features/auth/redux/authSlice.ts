@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
-import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { User } from "../../../../../shared/types";
-import { RootState } from "../../../app/store";
-import { clearStoredUser, getStoredUser, setStoredUser } from "../api";
-import { LoggedInUser, SignInDetails, SignInStatus } from "../types";
+import { User } from '../../../../../shared/types';
+import { RootState } from '../../../app/store';
+import { clearStoredUser, getStoredUser, setStoredUser } from '../api';
+import { LoggedInUser, SignInDetails, SignInStatus } from '../types';
 
 export type AuthState = {
   userDetails?: LoggedInUser;
@@ -13,7 +13,7 @@ export type AuthState = {
 
 const getInitialState = (): AuthState => {
   const initialState: AuthState = {
-    signInStatus: "idle",
+    signInStatus: 'idle',
   };
   const storedUser = getStoredUser();
   if (storedUser) initialState.userDetails = storedUser;
@@ -22,12 +22,12 @@ const getInitialState = (): AuthState => {
 
 const createAuthSlice = (initialState: AuthState) =>
   createSlice({
-    name: "user",
+    name: 'user',
     initialState,
     reducers: {
       signIn: (state, action: PayloadAction<LoggedInUser>) => {
         // clear "pending" signInStatus so sign-in page can redirect without triggering cancelSignIn
-        state.signInStatus = "idle";
+        state.signInStatus = 'idle';
         state.userDetails = action.payload;
         setStoredUser(action.payload);
       },
@@ -36,16 +36,16 @@ const createAuthSlice = (initialState: AuthState) =>
         clearStoredUser();
       },
       startSignIn: (state) => {
-        state.signInStatus = "pending";
+        state.signInStatus = 'pending';
       },
       endSignIn: (state) => {
-        state.signInStatus = "idle";
+        state.signInStatus = 'idle';
       },
     },
   });
 
-export const signInRequest = createAction<SignInDetails>("signInRequest");
-export const cancelSignIn = createAction("cancelSignIn");
+export const signInRequest = createAction<SignInDetails>('signInRequest');
+export const cancelSignIn = createAction('cancelSignIn');
 
 export const selectors = {
   getUserDetails: (state: RootState): User | null => state.user.userDetails,

@@ -3,15 +3,15 @@ import {
   configureStore,
   EnhancedStore,
   ThunkAction,
-} from "@reduxjs/toolkit";
-import createSagaMiddleware from "redux-saga";
+} from '@reduxjs/toolkit';
+import createSagaMiddleware from 'redux-saga';
 
-import loggedInUserReducer from "../../features/auth/redux/authSlice";
-import { bandApi } from "../../features/band/redux/bandApi";
-import { showApi } from "../../features/tickets/redux/showApi";
-import ticketReducer from "../../features/tickets/redux/ticketSlice";
-import toastReducer from "../../features/toast/redux/toastSlice";
-import { rootSaga } from "./sagas";
+import loggedInUserReducer from '../../features/auth/redux/authSlice';
+import { bandApi } from '../../features/band/redux/bandApi';
+import { showApi } from '../../features/tickets/redux/showApi';
+import ticketReducer from '../../features/tickets/redux/ticketSlice';
+import toastReducer from '../../features/toast/redux/toastSlice';
+import { rootSaga } from './sagas';
 
 export const configureStoreWithMiddlewares = (
   initialState = {}
@@ -32,7 +32,7 @@ export const configureStoreWithMiddlewares = (
         .concat(showApi.middleware)
         .concat(bandApi.middleware),
     preloadedState: initialState,
-    devTools: process.env.NODE_ENV !== "production",
+    devTools: process.env.NODE_ENV !== 'production',
   });
 
   sagaMiddleware.run(rootSaga);

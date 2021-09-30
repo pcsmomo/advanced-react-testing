@@ -13,9 +13,9 @@ export interface NewUser {
 export type User = Id & NewUser;
 
 export interface ShowWithoutAvailableSeatCount {
-  id: number
-  band: Band
-  scheduledAt: Date
+  id: number;
+  band: Band;
+  scheduledAt: Date;
 }
 
 export interface availableSeatCount {
@@ -25,36 +25,36 @@ export interface availableSeatCount {
 export type Show = ShowWithoutAvailableSeatCount & availableSeatCount;
 
 export enum TicketAction {
-  hold="hold",
-  purchase="purchase",
-  release="release",
-  cancelPurchase="cancel purchase"
+  hold = 'hold',
+  purchase = 'purchase',
+  release = 'release',
+  cancelPurchase = 'cancel purchase',
 }
 
 export interface ReservationBase {
-  id: number
-  showId: number
-  userId: number
-  seatCount: number
+  id: number;
+  showId: number;
+  userId: number;
+  seatCount: number;
 }
 
 export interface Reservation extends ReservationBase {
-  type: TicketAction
+  type: TicketAction;
 }
 
 export interface HoldReservation extends ReservationBase {
-  type: TicketAction.hold
+  type: TicketAction.hold;
 }
 
 export interface PurchaseReservation extends ReservationBase {
-  type: TicketAction.purchase
+  type: TicketAction.purchase;
 }
 
 export interface Band {
-  id: number
-  name: string
-  description: string
-  image: Image
+  id: number;
+  name: string;
+  description: string;
+  image: Image;
 }
 export interface Image {
   fileName: string;

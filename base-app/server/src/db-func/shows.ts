@@ -12,15 +12,14 @@ import {
 import { getAvailableSeatCountByShowId } from './reservations.js';
 
 export async function writeShows(
-  newShowsArray: ShowWithoutAvailableSeatCount[],
+  newShowsArray: ShowWithoutAvailableSeatCount[]
 ): Promise<void> {
   await writeJSONToFile(filenames.shows, newShowsArray);
 }
 
 export async function getShows(): Promise<Show[]> {
-  const showsMinusAvailableSeatCount = await getJSONfromFile<ShowWithoutAvailableSeatCount>(
-    filenames.shows,
-  );
+  const showsMinusAvailableSeatCount =
+    await getJSONfromFile<ShowWithoutAvailableSeatCount>(filenames.shows);
   const availableSeatCountByShowId = await getAvailableSeatCountByShowId();
 
   const fullDataShows = showsMinusAvailableSeatCount.map((show) => {
@@ -40,7 +39,7 @@ export async function getShowById(showId: number): Promise<Show> {
   const showWithoutSeatCount = await getItemById<ShowWithoutAvailableSeatCount>(
     showId,
     filenames.shows,
-    'show',
+    'show'
   );
   const availableSeatCountByShowId = await getAvailableSeatCountByShowId();
   const availableSeatCount =

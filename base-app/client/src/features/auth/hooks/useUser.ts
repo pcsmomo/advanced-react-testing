@@ -1,6 +1,6 @@
-import { User } from "../../../../../shared/types";
-import { useAppSelector } from "../../../app/store/hooks";
-import { SignInStatus } from "../types";
+import { User } from '../../../../../shared/types';
+import { useAppSelector } from '../../../app/store/hooks';
+import { SignInStatus } from '../types';
 
 export function useUser(): { user: User; signInStatus: SignInStatus } {
   const fullUser = useAppSelector((state) => state.user);

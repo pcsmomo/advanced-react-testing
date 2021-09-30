@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 export function useWillUnmount(fn: () => void): void {
   // the ref makes it so the fn doesn't have to be a dependency in the useEffect

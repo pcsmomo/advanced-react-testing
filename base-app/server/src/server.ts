@@ -37,7 +37,7 @@ app.use(
   cors({
     origin: 'http://localhost:3000',
     credentials: true,
-  }),
+  })
 );
 
 /* ********* middlewares ********* */
@@ -55,7 +55,7 @@ app.use(
     secret: process.env.EXPRESS_SECRET || 'NOT SO SECRET',
     algorithms: ['HS256'],
     requestProperty: 'auth',
-  }),
+  })
 );
 app.use('/user/:id', validateUser);
 
@@ -97,7 +97,7 @@ const startUp = async () => {
 
   app.listen(3030, () =>
     // eslint-disable-next-line no-console
-    console.log('Concert venue server listening on port 3030!'),
+    console.log('Concert venue server listening on port 3030!')
   );
 };
 

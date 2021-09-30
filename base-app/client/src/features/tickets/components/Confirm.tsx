@@ -1,23 +1,23 @@
-import { Button, Heading, HStack, Stack, Text } from "@chakra-ui/react";
-import React from "react";
-import Countdown, { CountdownRendererFn } from "react-countdown";
-import { useHistory, useParams } from "react-router";
-import { useLocation } from "react-router-dom";
+import { Button, Heading, HStack, Stack, Text } from '@chakra-ui/react';
+import React from 'react';
+import Countdown, { CountdownRendererFn } from 'react-countdown';
+import { useHistory, useParams } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
-import { HoldReservation } from "../../../../../shared/types";
-import { useWillUnmount } from "../../../app/hooks/useWillUnmount";
-import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
-import { generateRandomId } from "../../../app/utils";
-import { useUser } from "../../auth/hooks/useUser";
-import { showToast } from "../../toast/redux/toastSlice";
+import { HoldReservation } from '../../../../../shared/types';
+import { useWillUnmount } from '../../../app/hooks/useWillUnmount';
+import { useAppDispatch, useAppSelector } from '../../../app/store/hooks';
+import { generateRandomId } from '../../../app/utils';
+import { useUser } from '../../auth/hooks/useUser';
+import { showToast } from '../../toast/redux/toastSlice';
 import {
   holdTickets,
   resetTransaction,
   startTicketAbort,
   startTicketPurchase,
   startTicketRelease,
-} from "../redux/ticketSlice";
-import { TicketAction, TransactionStatus } from "../types";
+} from '../redux/ticketSlice';
+import { TicketAction, TransactionStatus } from '../types';
 
 const fiveMinutes = 300000;
 // const fiveSeconds = 5000;
@@ -34,8 +34,8 @@ export function Confirm(): React.ReactElement {
   );
 
   const query = new URLSearchParams(useLocation().search);
-  const seatCount = query.get("seatCount");
-  const holdId = query.get("holdId");
+  const seatCount = query.get('seatCount');
+  const holdId = query.get('holdId');
 
   const holdReservation: HoldReservation = {
     id: Number(holdId),
@@ -48,7 +48,7 @@ export function Confirm(): React.ReactElement {
   // start the reservation on mount if required data is present
   React.useEffect(() => {
     if (!seatCount || !holdId) {
-      dispatch(showToast({ title: "error holding seats", status: "error" }));
+      dispatch(showToast({ title: 'error holding seats', status: 'error' }));
       history.push(`/tickets/${showId}`);
     } else {
       dispatch(holdTickets(holdReservation));
@@ -60,7 +60,7 @@ export function Confirm(): React.ReactElement {
   React.useEffect(() => {
     if (transactionStatus === TransactionStatus.completed) {
       dispatch(resetTransaction());
-      history.push("/shows");
+      history.push('/shows');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transactionStatus]);
@@ -70,7 +70,7 @@ export function Confirm(): React.ReactElement {
     dispatch(
       startTicketAbort({
         reservation: holdReservation,
-        reason: "ticket hold canceled",
+        reason: 'ticket hold canceled',
       })
     );
   });
@@ -79,10 +79,10 @@ export function Confirm(): React.ReactElement {
     dispatch(
       startTicketRelease({
         reservation: holdReservation,
-        reason: "ticket hold canceled",
+        reason: 'ticket hold canceled',
       })
     );
-    history.push("/shows");
+    history.push('/shows');
   };
 
   const confirmPurchase = () => {
@@ -109,7 +109,7 @@ export function Confirm(): React.ReactElement {
       dispatch(
         startTicketRelease({
           reservation: holdReservation,
-          reason: "ticket hold expired",
+          reason: 'ticket hold expired',
         })
       );
       return null;

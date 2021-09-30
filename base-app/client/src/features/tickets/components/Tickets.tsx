@@ -12,14 +12,14 @@ import {
   Stack,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import React from "react";
-import { useHistory, useParams } from "react-router";
+} from '@chakra-ui/react';
+import React from 'react';
+import { useHistory, useParams } from 'react-router';
 
-import { LoadingSpinner } from "../../../app/components/LoadingSpinner";
-import { QueryError } from "../../../app/components/QueryError";
-import { formatDate, generateRandomId } from "../../../app/utils";
-import { useGetShowByIdQuery } from "../redux/showApi";
+import { LoadingSpinner } from '../../../app/components/LoadingSpinner';
+import { QueryError } from '../../../app/components/QueryError';
+import { formatDate, generateRandomId } from '../../../app/utils';
+import { useGetShowByIdQuery } from '../redux/showApi';
 
 export function Tickets(): React.ReactElement {
   const { showId } = useParams<{ showId: string }>();
@@ -30,7 +30,7 @@ export function Tickets(): React.ReactElement {
   } = useGetShowByIdQuery(showId, {
     refetchOnMountOrArgChange: true,
   });
-  const [reservedSeatCount, setReservedSeatCount] = React.useState("2");
+  const [reservedSeatCount, setReservedSeatCount] = React.useState('2');
   const history = useHistory();
 
   const onSubmit = () => {
@@ -58,7 +58,7 @@ export function Tickets(): React.ReactElement {
             <>
               <Heading
                 size="md"
-                color={show.availableSeatCount < 10 ? "red.500" : "inherit"}
+                color={show.availableSeatCount < 10 ? 'red.500' : 'inherit'}
               >
                 {show.availableSeatCount} seats left
               </Heading>

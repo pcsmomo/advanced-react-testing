@@ -39,7 +39,7 @@ export function passwordIsValid(password: string, user: AuthUser): boolean {
     user.salt,
     user.iterations,
     user.keylen,
-    user.digest,
+    user.digest
   );
   return user.hash === attemptHash.toString();
 }

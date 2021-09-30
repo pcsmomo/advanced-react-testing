@@ -27,7 +27,7 @@ import { getShows, writeShows } from '../shows.js';
 function getUnique<ItemType>(
   items: Array<ItemType>,
   itemType: string,
-  containerType: string,
+  containerType: string
 ): ItemType {
   // find a random item and swap it with the last item for popping
   const randomIndex = Math.floor(Math.random() * items.length);
@@ -122,7 +122,7 @@ async function generateShows(bands: Array<Band>) {
 async function areFutureShowsScheduled(): Promise<boolean> {
   const existingShows = await getShows();
   const futureShowDates = existingShows.filter(
-    (show) => dayjs(show.scheduledAt) > dayjs(),
+    (show) => dayjs(show.scheduledAt) > dayjs()
   );
   return futureShowDates.length > 0;
 }

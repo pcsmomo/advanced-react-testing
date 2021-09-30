@@ -9,17 +9,17 @@ import {
   Heading,
   Input,
   Stack,
-} from "@chakra-ui/react";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { useHistory, useLocation } from "react-router-dom";
+} from '@chakra-ui/react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useHistory, useLocation } from 'react-router-dom';
 
-import { LoadingSpinner } from "../../../app/components/LoadingSpinner";
-import { useWillUnmount } from "../../../app/hooks/useWillUnmount";
-import { useAppDispatch } from "../../../app/store/hooks";
-import { useUser } from "../hooks/useUser";
-import { cancelSignIn, signInRequest } from "../redux/authSlice";
-import { AuthenticateAction, SignInDetails } from "../types";
+import { LoadingSpinner } from '../../../app/components/LoadingSpinner';
+import { useWillUnmount } from '../../../app/hooks/useWillUnmount';
+import { useAppDispatch } from '../../../app/store/hooks';
+import { useUser } from '../hooks/useUser';
+import { cancelSignIn, signInRequest } from '../redux/authSlice';
+import { AuthenticateAction, SignInDetails } from '../types';
 
 interface FormField {
   display: string;
@@ -41,9 +41,9 @@ export function SignIn(): React.ReactElement {
   const location = useLocation();
 
   const from =
-    location.state && location.pathname !== "/"
+    location.state && location.pathname !== '/'
       ? location.state.from
-      : { pathname: "/profile" };
+      : { pathname: '/profile' };
 
   React.useEffect(() => {
     // once the user is logged in, redirect back to referrer
@@ -56,22 +56,22 @@ export function SignIn(): React.ReactElement {
   const onSubmit = (data: SignInDetails, action: AuthenticateAction) =>
     dispatch(signInRequest({ ...data, action }));
   const handleSignIn = handleSubmit((data: SignInDetails) =>
-    onSubmit(data, "signIn")
+    onSubmit(data, 'signIn')
   );
   const handleSignUp = handleSubmit((data: SignInDetails) =>
-    onSubmit(data, "signUp")
+    onSubmit(data, 'signUp')
   );
 
   // cancel signIn / signUp if user navigates away
   useWillUnmount(() => {
-    if (signInStatus === "pending") {
+    if (signInStatus === 'pending') {
       dispatch(cancelSignIn());
     }
   });
 
   const formFields: Array<FormField> = [
-    { name: "email", display: "Email address", default: "test@test.com" },
-    { name: "password", display: "Password", default: "test" },
+    { name: 'email', display: 'Email address', default: 'test@test.com' },
+    { name: 'password', display: 'Password', default: 'test' },
   ];
 
   return (
@@ -115,7 +115,7 @@ export function SignIn(): React.ReactElement {
                 <Flex
                   mt={4}
                   justifyContent="flex-end"
-                  style={{ fontFamily: "Unica One" }}
+                  style={{ fontFamily: 'Unica One' }}
                 >
                   <Button mr={2} variant="outline" onClick={handleSignUp}>
                     Sign up
@@ -127,7 +127,7 @@ export function SignIn(): React.ReactElement {
               </form>
             </Stack>
           </Box>
-          <LoadingSpinner display={signInStatus === "pending"} />
+          <LoadingSpinner display={signInStatus === 'pending'} />
         </Stack>
       </Flex>
     </>

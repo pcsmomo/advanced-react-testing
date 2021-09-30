@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from 'axios';
 
-import { User } from "../../../../shared/types";
-import { baseUrl } from "./constants";
+import { User } from '../../../../shared/types';
+import { baseUrl } from './constants';
 
 interface jwtHeader {
   Authorization?: string;

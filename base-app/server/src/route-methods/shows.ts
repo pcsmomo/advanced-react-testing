@@ -93,7 +93,7 @@ export async function release(req: Request, res: Response): Promise<Response> {
 
 export async function cancelPurchase(
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<Response> {
   const { purchaseId } = req.params;
   const purchaseIdNumber = Number(purchaseId);

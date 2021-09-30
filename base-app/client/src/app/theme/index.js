@@ -1,45 +1,45 @@
-import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react";
+import { extendTheme, withDefaultColorScheme } from '@chakra-ui/react';
 
 export const theme = extendTheme(
   {
-    initialColorMode: "dark",
+    initialColorMode: 'dark',
     useSystemColorMode: false,
     styles: {
       global: {
         body: {
-          color: "gray.50",
-          backgroundColor: "gray.900",
-          ringColor: "gray.500",
+          color: 'gray.50',
+          backgroundColor: 'gray.900',
+          ringColor: 'gray.500',
         },
         input: {
-          borderColor: "gray.700",
+          borderColor: 'gray.700',
         },
       },
     },
     shadows: {
-      outline: "0 0 0 3px rgba(125, 125, 125, 0.6)",
+      outline: '0 0 0 3px rgba(125, 125, 125, 0.6)',
     },
     fonts: {
-      body: "Unica One, sans-serif",
-      heading: "Unica One, sans-serif",
-      mono: "Menlo, monospace",
+      body: 'Unica One, sans-serif',
+      heading: 'Unica One, sans-serif',
+      mono: 'Menlo, monospace',
     },
     components: {
       Button: {
         variants: {
           solid: {
-            bg: "gray.700",
+            bg: 'gray.700',
             _hover: {
-              bg: "gray.500",
+              bg: 'gray.500',
             },
           },
           outline: {
-            borderColor: "gray.500",
-            color: "gray.600",
+            borderColor: 'gray.500',
+            color: 'gray.600',
           },
         },
       },
     },
   },
-  withDefaultColorScheme({ colorScheme: "gray" })
+  withDefaultColorScheme({ colorScheme: 'gray' })
 );

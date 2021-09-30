@@ -1,6 +1,6 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading } from '@chakra-ui/react';
 
-import { BackgroundImage } from "./BackgroundImage";
+import { BackgroundImage } from './BackgroundImage';
 
 export function Home(): React.ReactElement {
   return (

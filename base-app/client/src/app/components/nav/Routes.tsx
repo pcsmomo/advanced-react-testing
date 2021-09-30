@@ -1,13 +1,13 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch } from 'react-router-dom';
 
-import { PrivateRoute } from "../../../features/auth/components/PrivateRoute";
-import { SignIn } from "../../../features/auth/components/SignIn";
-import { UserProfile } from "../../../features/auth/components/UserProfile";
-import { Band } from "../../../features/band/components/Band";
-import { Confirm } from "../../../features/tickets/components/Confirm";
-import { Shows } from "../../../features/tickets/components/Shows";
-import { Tickets } from "../../../features/tickets/components/Tickets";
-import { Home } from "../Home";
+import { PrivateRoute } from '../../../features/auth/components/PrivateRoute';
+import { SignIn } from '../../../features/auth/components/SignIn';
+import { UserProfile } from '../../../features/auth/components/UserProfile';
+import { Band } from '../../../features/band/components/Band';
+import { Confirm } from '../../../features/tickets/components/Confirm';
+import { Shows } from '../../../features/tickets/components/Shows';
+import { Tickets } from '../../../features/tickets/components/Tickets';
+import { Home } from '../Home';
 
 export function Routes(): React.ReactElement {
   return (

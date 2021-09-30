@@ -1,10 +1,10 @@
-import { Box, Heading, Image, Link, Text, VStack } from "@chakra-ui/react";
-import { useParams } from "react-router";
+import { Box, Heading, Image, Link, Text, VStack } from '@chakra-ui/react';
+import { useParams } from 'react-router';
 
-import { imageUrl } from "../../../app/axios/constants";
-import { LoadingSpinner } from "../../../app/components/LoadingSpinner";
-import { QueryError } from "../../../app/components/QueryError";
-import { useGetBandByIdQuery } from "../redux/bandApi";
+import { imageUrl } from '../../../app/axios/constants';
+import { LoadingSpinner } from '../../../app/components/LoadingSpinner';
+import { QueryError } from '../../../app/components/QueryError';
+import { useGetBandByIdQuery } from '../redux/bandApi';
 
 export function Band(): React.ReactElement {
   const { bandId } = useParams<{ bandId: string }>();
@@ -16,7 +16,7 @@ export function Band(): React.ReactElement {
   return (
     <Box m={5} pt={5} align="center">
       <LoadingSpinner display={isLoading} />
-      <VStack display={band ? "inherit" : "none"}>
+      <VStack display={band ? 'inherit' : 'none'}>
         <Heading>{band?.name}</Heading>
         <Text fontSize="xl" pb={5}>
           {band?.description}
@@ -34,7 +34,7 @@ export function Band(): React.ReactElement {
           fontFamily="Lato"
           fontSize="sm"
         >
-          photo by{" "}
+          photo by{' '}
           <Link href={band?.image.authorLink} isExternal>
             {band?.image.authorName}
           </Link>

@@ -1,9 +1,9 @@
 /* eslint-disable max-lines-per-function */
-import { Flex, Heading, Stack } from "@chakra-ui/react";
-import { ReactElement } from "react";
-import { Redirect } from "react-router-dom";
+import { Flex, Heading, Stack } from '@chakra-ui/react';
+import { ReactElement } from 'react';
+import { Redirect } from 'react-router-dom';
 
-import { useUser } from "../hooks/useUser";
+import { useUser } from '../hooks/useUser';
 
 export function UserProfile(): ReactElement {
   const { user } = useUser();

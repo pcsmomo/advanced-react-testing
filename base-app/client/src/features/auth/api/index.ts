@@ -1,9 +1,9 @@
-import { axiosInstance } from "../../../app/axios";
-import { endpoints } from "../../../app/axios/constants";
-import { clearItem, getItem, storeItem } from "../../../app/utils/storage";
-import { LoggedInUser, SignInDetails } from "../types";
+import { axiosInstance } from '../../../app/axios';
+import { endpoints } from '../../../app/axios/constants';
+import { clearItem, getItem, storeItem } from '../../../app/utils/storage';
+import { LoggedInUser, SignInDetails } from '../types';
 
-const LOCALSTORAGE_USER_KEY = "tickets-user";
+const LOCALSTORAGE_USER_KEY = 'tickets-user';
 
 export const authServerCall = async ({
   email,
@@ -15,9 +15,9 @@ export const authServerCall = async ({
 
   const { data, status } = await axiosInstance({
     url: endpoints[action],
-    method: "POST",
+    method: 'POST',
     data: { email, password },
-    headers: { "Content-Type": "application/json" },
+    headers: { 'Content-Type': 'application/json' },
     validateStatus: (code) => {
       return code === 400 || (code >= 200 && code < 300);
     },

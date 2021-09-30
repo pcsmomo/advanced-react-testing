@@ -1,8 +1,8 @@
-import { User } from "../../../../../shared/types";
+import { User } from '../../../../../shared/types';
 
-export type AuthenticateAction = "signIn" | "signUp";
+export type AuthenticateAction = 'signIn' | 'signUp';
 
-export type SignInStatus = "idle" | "pending";
+export type SignInStatus = 'idle' | 'pending';
 
 export type LoggedInUser = {
   userToken?: string;

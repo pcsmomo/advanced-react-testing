@@ -23,3 +23,19 @@ test('saga caslls analytics when it receives error toast', () => {
     .call(logErrorToast, "It's time to panic!!!!")
     .run();
 });
+
+const infoToastOptions: ToastOptions = {
+  title: "It's not time to panic",
+  status: 'info',
+};
+
+const infoToastAction = {
+  type: 'test',
+  payload: infoToastOptions,
+};
+
+test('saga does not call analytics when it receives info toast', () => {
+  return expectSaga(logErrorToasts, infoToastAction)
+    .not.call(logErrorToast, "It's not time to panic")
+    .run();
+});

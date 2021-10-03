@@ -91,6 +91,12 @@ gB.next();
 > Thinking of it as: \
 > Ability to "pause" functions
 
+### 197. redux-saga
+
+```sh
+npm install --save redux-saga
+```
+
 ---
 
 </details>

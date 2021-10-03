@@ -65,4 +65,32 @@ Advanced React Testing: Redux Saga and React Router by Bonnie Schulkin
 - We will mostly integration testing in this course
   - unit tests for fork cancel, not possible in integration
 
+---
+
+> I've decided to go the "Redux Saga" part through once more
+
+## Complete React Developer - Redux Saga
+
+### 195. Generator Functions
+
+```js
+function* genC(i) {
+  yield i;
+  yield i + 10;
+  return 25;
+}
+const gB = gen(5);
+gB.next();
+// { value: 5, done: false }
+gB.next();
+// { value: 15, done: false }
+gB.next();
+// { value: 25, done: true }
+```
+
+> Thinking of it as: \
+> Ability to "pause" functions
+
+---
+
 </details>

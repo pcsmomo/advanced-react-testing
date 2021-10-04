@@ -12,7 +12,7 @@ function* genB(i) {
   yield i + 10;
 }
 
-const gB = gen(5);
+const gB = genB(5);
 const aObj = gB.next();
 // { value: 5, done: false }
 const bObj = gB.next();
@@ -25,10 +25,10 @@ function* genC(i) {
   yield i + 10;
   return 25;
 }
-const gB = gen(5);
-gB.next();
+const gC = genC(5);
+gC.next();
 // { value: 5, done: false }
-gB.next();
+gC.next();
 // { value: 15, done: false }
-gB.next();
+gC.next();
 // { value: 25, done: true }

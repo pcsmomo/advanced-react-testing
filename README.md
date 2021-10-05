@@ -97,9 +97,10 @@ gB.next();
 npm install --save redux-saga
 ```
 
-###
+### 198. Redux Thunk Into Saga
 
 ```js
+// shop.sagas.js
 import { take, takeEvery, takeLatest, delay, put } from "redux-saga/effects";
 
 export function* onIncrement() {
@@ -137,6 +138,19 @@ export function* incrementSagaTakeWhile() {
 export function* incrementSagaTake() {
   yield take("INCREMENT");
   console.log("I am incremented");
+}
+```
+
+### 200. Root Saga
+
+```js
+// root-saga.js
+import { all, call } from "redux-saga/effects";
+import { fetchCollectionsStart } from "./shop/shop.sagas";
+
+export default function* rootSaga() {
+  // all : https://redux-saga.js.org/docs/api/#alleffects---parallel-effects
+  yield all([call(fetchCollectionsStart)]);
 }
 ```
 

@@ -12,6 +12,7 @@ import {
   takeEvery,
 } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
+import * as matchers from 'redux-saga-test-plan/matchers';
 
 import { HoldReservation } from '../../../../../shared/types';
 import {
@@ -53,6 +54,7 @@ const holdAction = {
 describe('common to all flows', () => {
   test('starts with hold call to server', () => {
     return expectSaga(ticketFlow, holdAction)
+      .provide([[matchers.call.fn(reserveTicketServerCall), null]])
       .call(reserveTicketServerCall, holdReservation)
       .run();
   });

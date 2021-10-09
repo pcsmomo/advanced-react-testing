@@ -191,4 +191,15 @@ What happens if you don't return? -> It will always pass (=fault positive)
 
 test function starts -> async call -> test function complets without error -> promise resolves -> assertions run
 
+### 15. Mocking with `.provide()` method
+
+_provide()_ Syntax
+
+- Static vs. dynamic
+  - static: array of tuples _[matcher, mock value]_
+  - dynamic: object liternal, _{ matcher: (effect, next) => {} }_
+- We will be using mostly static
+  - Dynamic: _race_ isn't available for static, making an effect take longer
+- Matchers: http://redux-saga-test-plan.jeremyfairbank.com/integration-testing/mocking/static-providers.html
+
 </details>

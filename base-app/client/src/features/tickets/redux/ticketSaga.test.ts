@@ -14,6 +14,11 @@ import {
 import { expectSaga } from 'redux-saga-test-plan';
 
 import { HoldReservation } from '../../../../../shared/types';
+import {
+  holdReservation,
+  purchasePayload,
+  purchaseReservation,
+} from '../../../test-utils/fake-data';
 import { showToast } from '../../toast/redux/toastSlice';
 import { ToastOptions } from '../../toast/types';
 import {
@@ -39,3 +44,16 @@ import {
   startTicketPurchase,
   startTicketRelease,
 } from './ticketSlice';
+
+const holdAction = {
+  type: 'test',
+  payload: holdReservation,
+};
+
+describe('common to all flows', () => {
+  test('starts with hold call to server', () => {
+    return expectSaga(ticketFlow, holdAction)
+      .call(reserveTicketServerCall, holdReservation)
+      .run();
+  });
+});

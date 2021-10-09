@@ -174,4 +174,21 @@ export default function* rootSaga() {
   - Partial assertions, such as _.call.fn()_
   - _.run()_ for running the saga
 
+### 14. Error from not Returning `expectSaga`
+
+```js
+expectSaga(ticketFlow, holdAction);
+return expectSaga(ticketFlow, holdAction);
+```
+
+What happens if you don't return? -> It will always pass (=fault positive)
+
+- Without return expectSaga() or await expectSaga()
+- Test function starts async expectSaga call
+  - Exits before promise resolves
+- Assertions run after promise resolves
+  - After test has already passed
+
+test function starts -> async call -> test function complets without error -> promise resolves -> assertions run
+
 </details>

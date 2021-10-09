@@ -55,7 +55,7 @@ Advanced React Testing: Redux Saga and React Router by Bonnie Schulkin
 ### 6. Introduction to redux-saga-test-plan
 
 - [Several options for saga test libraries](https://redux-saga.js.org/docs/advanced/Testing/)
-- [redux-saga-test-plan doc](http://redux-saga-test-plan.jeremyfairbank.com/)
+- [redux-saga-test-plan doc](https://redux-saga-test-plan.jeremyfairbank.com/)
 - Integration testing
   - run the saga as a whole
   - assert on effects (e.g. put or call)
@@ -158,7 +158,7 @@ export default function* rootSaga() {
 
 ### 10. Partial Assertions
 
-[redux-saga-test-plan : Partial Assertions - Helper Methods](http://redux-saga-test-plan.jeremyfairbank.com/integration-testing/partial-matching.html)
+[redux-saga-test-plan : Partial Assertions - Helper Methods](https://redux-saga-test-plan.jeremyfairbank.com/integration-testing/partial-matching.html)
 
 ### 11. Review: redux-saga-test-plan Introduction
 
@@ -200,6 +200,6 @@ _provide()_ Syntax
   - dynamic: object liternal, _{ matcher: (effect, next) => {} }_
 - We will be using mostly static
   - Dynamic: _race_ isn't available for static, making an effect take longer
-- Matchers: http://redux-saga-test-plan.jeremyfairbank.com/integration-testing/mocking/static-providers.html
+- Matchers: https://redux-saga-test-plan.jeremyfairbank.com/integration-testing/mocking/static-providers.html
 
 </details>

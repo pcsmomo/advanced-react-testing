@@ -54,7 +54,16 @@ const holdAction = {
 describe('common to all flows', () => {
   test('starts with hold call to server', () => {
     return expectSaga(ticketFlow, holdAction)
-      .provide([[matchers.call.fn(reserveTicketServerCall), null]])
+      .provide([
+        [matchers.call.fn(reserveTicketServerCall), null],
+        [matchers.call.fn(releaseServerCall), null],
+      ])
+      .dispatch(
+        startTicketAbort({
+          reservation: holdReservation,
+          reason: 'Abort! Abort!',
+        })
+      )
       .call(reserveTicketServerCall, holdReservation)
       .run();
   });

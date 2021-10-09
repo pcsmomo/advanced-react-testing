@@ -156,4 +156,8 @@ export default function* rootSaga() {
 
 ---
 
+### 10. Partial Assertions
+
+[redux-saga-test-plan : Partial Assertions - Helper Methods](http://redux-saga-test-plan.jeremyfairbank.com/integration-testing/partial-matching.html)
+
 </details>

@@ -125,9 +125,13 @@ export function* ticketFlow({
     }
   } catch (error) {
     const ticketAction = yield select(selectors.getTicketAction);
-    yield put(
-      showToast(generateErrorToastOptions(error.message, ticketAction))
-    );
+
+    // https://stackoverflow.com/questions/60151181/object-is-of-type-unknown-typescript-generics
+    let errorMessage = 'Failed to do something exceptional';
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    yield put(showToast(generateErrorToastOptions(errorMessage, ticketAction)));
 
     yield call(cancelTransaction, holdPayload);
   }

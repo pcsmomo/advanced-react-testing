@@ -160,4 +160,18 @@ export default function* rootSaga() {
 
 [redux-saga-test-plan : Partial Assertions - Helper Methods](http://redux-saga-test-plan.jeremyfairbank.com/integration-testing/partial-matching.html)
 
+### 11. Review: redux-saga-test-plan Introduction
+
+- Integration testing (We will do mostly integration testing)
+  - Run entire saga
+  - Tools like mocks and partial matchers
+- Unit testing (It will be introduced at the end of this course)
+  - Run saga step-by-step
+  - Assert on effects AND order
+- _redux-saga-test-plan_ syntax
+  - _return / await expectSaga_
+  - _[.not].effect()_ for assertions
+  - Partial assertions, such as _.call.fn()_
+  - _.run()_ for running the saga
+
 </details>

@@ -202,4 +202,19 @@ _provide()_ Syntax
   - Dynamic: _race_ isn't available for static, making an effect take longer
 - Matchers: https://redux-saga-test-plan.jeremyfairbank.com/integration-testing/mocking/static-providers.html
 
+### 20. Code Quiz! Purchase Error
+
+- Pass _ticketFlow_ to _expectSaga_
+- Mock similar to last error thrown test (network providers, selector, override)
+- Provider that throws error, use _matchers.call.like_:
+  ```js
+  matchers.call.like({
+    fn: reserveTicketServerCall,
+    args: [purchaseReservation], // not holdReservation!
+  });
+  ```
+- Dispatch this action to trigger _purchaseTickets_ saga:
+  `startTicketPurchase(purchasePayload)`
+- Assertions similar to last error thrown test
+
 </details>

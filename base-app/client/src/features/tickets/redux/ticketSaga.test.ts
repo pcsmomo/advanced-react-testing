@@ -55,6 +55,7 @@ const holdAction = {
 const networkProviders: Array<StaticProvider> = [
   [matchers.call.fn(reserveTicketServerCall), null],
   [matchers.call.fn(releaseServerCall), null],
+  [matchers.call.fn(cancelPurchaseServerCall), null],
 ];
 
 test('cancelTransaction cancels hold and resets transaction', () => {
@@ -83,7 +84,11 @@ describe('common to all flows', () => {
       expectSaga(ticketFlow, holdAction)
         .provide([
           [
-            matchers.call(reserveTicketServerCall),
+            // matchers.call(reserveTicketServerCall),
+            matchers.call.like({
+              fn: reserveTicketServerCall,
+              args: [holdReservation],
+            }),
             throwError(new Error('it did not work')),
           ],
           // write provider for selector
@@ -102,5 +107,34 @@ describe('common to all flows', () => {
         .call(cancelTransaction, holdReservation)
         .run()
     );
+  });
+});
+
+describe('purchase flow', () => {
+  test('network error on purchase shows toast and cencels transaction', () => {
+    return expectSaga(ticketFlow, holdAction)
+      .provide([
+        [
+          matchers.call.like({
+            fn: reserveTicketServerCall,
+            args: [purchaseReservation], // not holdReservation!
+          }),
+          throwError(new Error('it did not work')),
+        ],
+        [
+          matchers.select.selector(selectors.getTicketAction),
+          TicketAction.hold,
+        ],
+        ...networkProviders,
+      ])
+      .dispatch(startTicketPurchase(purchasePayload))
+      .call.fn(cancelPurchaseServerCall)
+      .put(
+        showToast(
+          generateErrorToastOptions('it did not work', TicketAction.hold)
+        )
+      )
+      .call(cancelTransaction, holdReservation)
+      .run();
   });
 });

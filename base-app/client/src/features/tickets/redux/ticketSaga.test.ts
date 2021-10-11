@@ -139,16 +139,29 @@ describe('purchase flow', () => {
   });
   test('abort purchase while call to server is running', () => {
     const cancelSource = axios.CancelToken.source();
-    return (
-      expectSaga(purchaseTickets, purchasePayload, cancelSource)
-        .provide(networkProviders)
-        // TODO: handle race so abort wins
-        .call(cancelSource.cancel)
-        .call(cancelPurchaseServerCall, purchaseReservation)
-        .put(showToast({ title: 'purchase canceled', status: 'warning' }))
-        .call(cancelTransaction, holdReservation)
-        .not.put(showToast({ title: 'tickets purchased', status: 'success' }))
-        .run()
-    );
+    return expectSaga(purchaseTickets, purchasePayload, cancelSource)
+      .provide([
+        ...networkProviders,
+        // [
+        //   race({
+        //     purchaseResult: call(
+        //       reserveTicketServerCall,
+        //       purchaseReservation,
+        //       cancelSource.token
+        //     ),
+        //     abort: take(startTicketAbort.type),
+        //   }),
+        //   { abort: true },
+        // ],
+        {
+          race: () => ({ abort: true }),
+        },
+      ])
+      .call(cancelSource.cancel)
+      .call(cancelPurchaseServerCall, purchaseReservation)
+      .put(showToast({ title: 'purchase canceled', status: 'warning' }))
+      .call(cancelTransaction, holdReservation)
+      .not.put(showToast({ title: 'tickets purchased', status: 'success' }))
+      .run();
   });
 });

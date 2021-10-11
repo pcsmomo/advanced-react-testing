@@ -228,4 +228,15 @@ _provide()_ Syntax
   - More challenging: write without looking at previous tests
   - Strong recommendation against copy/paste
 
+### 24. OPTIONAL Code Quiz! Hold Cancel
+
+Technical Notes
+
+- Dispatch this action for "cancel":
+  - `startTicketRelease({ reservation: holdReservation, reason: "test" })`
+- Dispatch this action for "abort":
+  - `startTicketAbort({ reservation: holdReservation, reason: "test" })`
+- Cancellation toast will look like this:
+  - `startToast({ title: "test", status: "warning" })`
+
 </details>

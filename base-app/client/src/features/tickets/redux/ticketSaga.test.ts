@@ -178,3 +178,38 @@ describe('purchase flow', () => {
       .run();
   });
 });
+
+describe('hold cancollation', () => {
+  test('cancels hold and resets ticket transaction on cancel', () => {
+    return expectSaga(ticketFlow, holdAction)
+      .provide(networkProviders)
+      .dispatch(
+        startTicketRelease({ reservation: holdReservation, reason: 'test' })
+      )
+      .call(reserveTicketServerCall, holdReservation)
+      .put(
+        showToast({
+          title: 'test',
+          status: 'warning',
+        })
+      )
+      .call(cancelTransaction, holdReservation)
+      .run();
+  });
+  test('cancels hold and resets ticket transaction on abort', () => {
+    return expectSaga(ticketFlow, holdAction)
+      .provide(networkProviders)
+      .dispatch(
+        startTicketAbort({ reservation: holdReservation, reason: 'test' })
+      )
+      .call(reserveTicketServerCall, holdReservation)
+      .put(
+        showToast({
+          title: 'test',
+          status: 'warning',
+        })
+      )
+      .call(cancelTransaction, holdReservation)
+      .run();
+  });
+});

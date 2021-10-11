@@ -164,4 +164,17 @@ describe('purchase flow', () => {
       .not.put(showToast({ title: 'tickets purchased', status: 'success' }))
       .run();
   });
+  test('successful purchase flow', () => {
+    const cancelSource = axios.CancelToken.source();
+    return expectSaga(purchaseTickets, purchasePayload, cancelSource)
+      .provide(networkProviders)
+      .call(reserveTicketServerCall, purchaseReservation, cancelSource.token)
+      .call(releaseServerCall, holdReservation)
+      .put(showToast({ title: 'tickets purchased', status: 'success' }))
+      .put(endTransaction())
+      .not.call.fn(cancelSource.cancel)
+      .not.call.fn(cancelPurchaseServerCall)
+      .not.put(showToast({ title: 'purchase canceled', status: 'warning' }))
+      .run();
+  });
 });

@@ -217,4 +217,15 @@ _provide()_ Syntax
   `startTicketPurchase(purchasePayload)`
 - Assertions similar to last error thrown test
 
+### 23. OPTIONAL Code Quiz! Successful Purchase
+
+- All of these effects happen in _purchaseTicket_ saga
+  - Plus assert on _cancelSource.cancel_ call from _cancelSource_ argument
+- No need for _race()_ provider here (just let the purchase win)
+- Provide all network mocks
+- Approaches
+  - Use previous tests as a guide, or
+  - More challenging: write without looking at previous tests
+  - Strong recommendation against copy/paste
+
 </details>

@@ -27,9 +27,14 @@ export function* authenticateUser(payload: SignInDetails): SagaIterator {
     );
   } catch (error) {
     const action = payload.action === 'signIn' ? 'in' : 'up';
+
+    let errorMessage = 'Failed to do something exceptional';
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
     yield put(
       showToast({
-        title: `Sign ${action} failed: ${error.message}`,
+        title: `Sign ${action} failed: ${errorMessage}`,
         status: 'warning',
       })
     );

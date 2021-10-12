@@ -252,4 +252,18 @@ test.each([argument object]) (test name, test function)
   - dynamic provider for _race_ effect
 - jest's _test.each()_ for parametrizing tests
 
+### 27. Introduction to Sign In Sagas
+
+- Watcher: _while_ loop with cancel-able _fork_
+  - cancel sign in if user navigates away from server returns
+- Slice manages _status_ piece of state (values: _idle_, _pending_)
+- Saga only manages sign in
+  - sign out doesn't have cancellation controls
+- Sign-in vs Sign-up
+
+### 28. Set Up signInSaga Test File
+
+test.todo()\
+`test.todo('successful sign-in');`
+
 </details>

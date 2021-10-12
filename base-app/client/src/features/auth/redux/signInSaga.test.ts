@@ -23,8 +23,14 @@ const signInRequestPayload: SignInDetails = {
   action: 'signIn',
 };
 
+const authServerResponse: LoggedInUser = {
+  email: 'booker@avalancheofcheese.com',
+  token: '12345',
+  id: 123,
+};
+
 const networkProviders: Array<StaticProvider> = [
-  [matchers.call.fn(authServerCall), null],
+  [matchers.call.fn(authServerCall), authServerResponse],
 ];
 
 describe('signInFlow saga', () => {
@@ -35,10 +41,16 @@ describe('signInFlow saga', () => {
       .fork(authenticateUser, signInRequestPayload)
       .put(startSignIn())
       .call(authServerCall, signInRequestPayload)
-      .put.actionType(signIn.type) // partial assertion
-      .put.actionType(showToast.type)
+      .put(signIn(authServerResponse))
+      .put(
+        showToast({
+          title: 'Signed in as booker@avalancheofcheese.com',
+          status: 'info',
+        })
+      )
       .put(endSignIn())
       .silentRun(25);
+    // .put.actionType(signIn(.type)) // partial assertion
     // .run(25) // there will be still warning message, but we don't need to wait whole 250ms, but only 25ms
   });
   test.todo('successful sign-up');

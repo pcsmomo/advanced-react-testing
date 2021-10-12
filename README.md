@@ -243,4 +243,13 @@ Technical Notes
 
 test.each([argument object]) (test name, test function)
 
+### 26. Review: Complex takeEvery Saga Tests
+
+- more _redux-saga-test-plan_ syntax
+  - _.provide()_ for mocking
+    - _throwError()_ value for throwing Error
+  - _.dispatch()_ for dispatching actions after start
+  - dynamic provider for _race_ effect
+- jest's _test.each()_ for parametrizing tests
+
 </details>

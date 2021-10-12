@@ -266,4 +266,15 @@ test.each([argument object]) (test name, test function)
 test.todo()\
 `test.todo('successful sign-in');`
 
+### 29. Testing Successful Sign-in: .silentRun and Timeout
+
+There will be a warning message because signInFlow() has infinite loop.
+
+```sh
+console.warn
+    [WARNING]: Saga exceeded async timeout of 25ms
+```
+
+Not to see this error, use `silentRun()` instead of `run()`
+
 </details>

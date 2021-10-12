@@ -239,4 +239,8 @@ Technical Notes
 - Cancellation toast will look like this:
   - `startToast({ title: "test", status: "warning" })`
 
+### 25. Parametrization with 'test.each()'
+
+test.each([argument object]) (test name, test function)
+
 </details>

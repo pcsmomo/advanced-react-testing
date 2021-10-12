@@ -277,4 +277,13 @@ console.warn
 
 Not to see this error, use `silentRun()` instead of `run()`
 
+### 31. Code Quiz! Sign Up Flow
+
+- Virtually identical to sign in flow
+  - only difference: payload to _signInRequest_
+  - actual code path diverges in call to the server
+- Worth including the test?
+  - probably not as a saga test
+  - maybe in e2e testing, check that the user was created
+
 </details>

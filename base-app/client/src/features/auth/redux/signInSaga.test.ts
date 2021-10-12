@@ -23,10 +23,16 @@ const signInRequestPayload: SignInDetails = {
   action: 'signIn',
 };
 
+const signUpRequestPayload: SignInDetails = {
+  email: 'booker@avalancheofcheese.com',
+  password: 'abc123',
+  action: 'signUp',
+};
+
 const authServerResponse: LoggedInUser = {
+  id: 123,
   email: 'booker@avalancheofcheese.com',
   token: '12345',
-  id: 123,
 };
 
 const networkProviders: Array<StaticProvider> = [
@@ -53,7 +59,23 @@ describe('signInFlow saga', () => {
     // .put.actionType(signIn(.type)) // partial assertion
     // .run(25) // there will be still warning message, but we don't need to wait whole 250ms, but only 25ms
   });
-  test.todo('successful sign-up');
+  test('successful sign-up', () => {
+    return expectSaga(signInFlow)
+      .provide(networkProviders)
+      .dispatch(signInRequest(signUpRequestPayload))
+      .fork(authenticateUser, signUpRequestPayload)
+      .put(startSignIn())
+      .call(authServerCall, signUpRequestPayload)
+      .put(signIn(authServerResponse))
+      .put(
+        showToast({
+          title: 'Signed in as booker@avalancheofcheese.com',
+          status: 'info',
+        })
+      )
+      .put(endSignIn())
+      .silentRun(25);
+  });
   test.todo('canceled sign-in');
   test.todo('sign-in error');
 });

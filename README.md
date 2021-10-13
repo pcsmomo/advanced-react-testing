@@ -286,4 +286,29 @@ Not to see this error, use `silentRun()` instead of `run()`
   - probably not as a saga test
   - maybe in e2e testing, check that the user was created
 
+### 32. Integration Test for Canceled Fork
+
+```js
+// as we have mock provider, authenticateUser completed almost immediately.
+.fork(authenticateUser, signInRequestPayload)
+// and cancelSignIn() didn't dispatch
+.dispatch(cancelSignIn())
+```
+
+Give it 500ms delay
+
+```js
+const sleep = (delay: number) =>
+  new Promise((resolve) => setTimeout(resolve, delay));
+
+.provide({s
+  call: async (effect, next) => {
+    if (effect.fn === authServerCall) {
+      await sleep(500);
+    }
+    next();
+  },
+})
+```
+
 </details>

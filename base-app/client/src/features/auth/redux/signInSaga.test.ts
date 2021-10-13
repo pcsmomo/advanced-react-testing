@@ -35,6 +35,9 @@ const authServerResponse: LoggedInUser = {
   token: '12345',
 };
 
+const sleep = (delay: number) =>
+  new Promise((resolve) => setTimeout(resolve, delay));
+
 const networkProviders: Array<StaticProvider> = [
   [matchers.call.fn(authServerCall), authServerResponse],
 ];
@@ -76,6 +79,23 @@ describe('signInFlow saga', () => {
       .put(endSignIn())
       .silentRun(25);
   });
-  test.todo('canceled sign-in');
+  test('canceled sign-in', () => {
+    return expectSaga(signInFlow)
+      .provide({
+        call: async (effect, next) => {
+          if (effect.fn === authServerCall) {
+            await sleep(500);
+          }
+          next();
+        },
+      })
+      .dispatch(signInRequest(signInRequestPayload))
+      .fork(authenticateUser, signInRequestPayload)
+      .dispatch(cancelSignIn())
+      .put(showToast({ title: 'Sign in canceled', status: 'warning' }))
+      .put(signOut())
+      .put(endSignIn())
+      .silentRun(25);
+  });
   test.todo('sign-in error');
 });

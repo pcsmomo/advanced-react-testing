@@ -337,4 +337,17 @@ redux-saga-test-plan Unit Tests
 Unlike Integration Test, \
 Unit test cannot chagne the order of sagas
 
+### 37. Review: Fork, Cancel, Infinite while Loop
+
+- Argument to _run()_ (timeout in milliseconds) to stop infinite loop
+  - use _silentRun()_ to suppress warnings
+- _sleep()_ helper function to make task run long enough to cancel
+- _cancel_ effect not supported by integration tests (yet)
+- unit tests
+  - propose a flow
+  - error if flow is not possible
+- I prefer integration tests
+  - unit tests are best if order is crucial
+  - or if integration tests aren't possible
+
 </details>

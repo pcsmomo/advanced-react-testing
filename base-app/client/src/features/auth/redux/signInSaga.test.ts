@@ -2,7 +2,7 @@ import { SagaIterator } from 'redux-saga';
 import { call, cancel, cancelled, fork, put, take } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
-import { StaticProvider } from 'redux-saga-test-plan/providers';
+import { StaticProvider, throwError } from 'redux-saga-test-plan/providers';
 
 import { showToast } from '../../toast/redux/toastSlice';
 import { authServerCall } from '../api';
@@ -97,5 +97,24 @@ describe('signInFlow saga', () => {
       .put(endSignIn())
       .silentRun(25);
   });
-  test.todo('sign-in error');
+  test('sign-in error', () => {
+    return expectSaga(signInFlow)
+      .provide([
+        [
+          matchers.call.fn(authServerCall),
+          throwError(new Error('server is broken')),
+        ],
+      ])
+      .dispatch(signInRequest(signInRequestPayload))
+      .fork(authenticateUser, signInRequestPayload)
+      .put(startSignIn())
+      .put(
+        showToast({
+          title: 'Sign in failed: server is broken',
+          status: 'warning',
+        })
+      )
+      .put(endSignIn())
+      .silentRun(25);
+  });
 });

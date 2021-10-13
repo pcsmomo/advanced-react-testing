@@ -393,4 +393,25 @@ create a repo and write a question in Q&A.
 
 Winner: Wrap components. Faster, more tarted tests
 
+### 42. Planning Custom render with Test Store
+
+- Each test needs its own store (no overlap)
+- Store should be close as possible to production store
+- Testing Library: _render (ui, options)_
+- The plan: write custom _render_ method to
+  - create store using function from app/store/index.ts
+  - add _initialState_ to options
+  - wrap _ui_ in Redux provider with store containing specified _initialState_
+  - run default Testing Library _render_ on wrapped _ui_ and return result
+- test-utils/index.ts file exports \* from @testing-library/react
+  - then overwrite default _render_ with custom _render_
+- import from test-utils instead of @testing-library/react
+- Eventually wrap in test Router as well
+- Redux Provider and Router for production in src/index.tsx
+  - instead of App.tsx
+  - better control in testing
+- Code adapted from Redux testing docs:
+  - https://redux.js.org/usage/writing-tests#components
+  - which are based on testing library docs: https://testing-library.com/docs/react-testing-library/setup#custom-render
+
 </details>

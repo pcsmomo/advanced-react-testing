@@ -311,4 +311,25 @@ const sleep = (delay: number) =>
 })
 ```
 
+### 34. Introduction to redux-saga-test-plan Unit Tests
+
+Asserting on _cancel_ Effect
+
+- How to assert a cancel occurred?
+- _cancel_ effect not supported by redux-saga-test-plan integration tests
+  - https://github.com/jfairbank/redux-saga-test-plan/issues/359
+- Workaround in GitHub issue to wrap cancel in custom function
+  - Complicates production code 👎
+  - Skip that assertion here
+
+redux-saga-test-plan Unit Tests
+
+- General idea
+  - propose a flow
+  - test fails if flow is not possible
+- Less flexible / forgibing than intergration tests
+- _next()_ moves the saga along
+  - argument to _next()_ is value yielded from previous effect
+- Need to create a mock task for fork / cancel
+
 </details>

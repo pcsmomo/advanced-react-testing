@@ -350,4 +350,9 @@ Unit test cannot chagne the order of sagas
   - unit tests are best if order is crucial
   - or if integration tests aren't possible
 
+## 38. Getting Help with Saga Tests
+
+If I got stuck during testing redux saga,\
+create a repo and write a question in Q&A.
+
 </details>

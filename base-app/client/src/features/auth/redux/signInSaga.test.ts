@@ -1,6 +1,4 @@
 import { createMockTask } from '@redux-saga/testing-utils';
-import { SagaIterator } from 'redux-saga';
-import { call, cancel, cancelled, fork, put, take } from 'redux-saga/effects';
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { StaticProvider, throwError } from 'redux-saga-test-plan/providers';

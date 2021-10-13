@@ -357,4 +357,40 @@ create a repo and write a question in Q&A.
 
 ## Section 5: Testing Library Custom render: Redux and React Router
 
+### 41. Custom render Concepts
+
+#### Custom render for Providers
+
+- Redux and React Router both have Providers that components need
+  - Redux: provides store
+  - React Router: provides history and location details
+- Don't wrap with Providers -> errors
+- Wrap with these Providers for every _render_ function?
+  - tedious and repititive
+- Solution:
+  - create custom _render_ function that includes providers
+  - add options to _render_ options object for initial state and router history
+
+#### Decisions for Testing Redux
+
+1. Put Provider in App, render App for all tests
+   - Pros:
+     - closer to production code
+     - simpler test setup (only render App, no Provider wrap)
+   - Cons:
+     - No control over initial state
+     - Can't render child components (they will be sad and provider-less, and throw errors)
+2. **Wrap components in Provider with test store**
+   - Pros:
+     - can specify initial state
+     - can render child components
+   - Cons:
+     - more complicated test setup
+       - Provider needs a store
+       - need to make a new one for each test
+     - farther from production code
+     - will use same function to create store
+
+Winner: Wrap components. Faster, more tarted tests
+
 </details>

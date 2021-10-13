@@ -332,4 +332,9 @@ redux-saga-test-plan Unit Tests
   - argument to _next()_ is value yielded from previous effect
 - Need to create a mock task for fork / cancel
 
+### 36. Code Quiz! Unit Tests
+
+Unlike Integration Test, \
+Unit test cannot chagne the order of sagas
+
 </details>

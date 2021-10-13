@@ -132,4 +132,13 @@ describe('unit tests for fork cancellation', () => {
     saga.next(cancelSignIn()).cancel(task);
     // saga.next(endSignIn()).cancel(task); // it will fail
   });
+  test('saga non-cancel flow', () => {
+    const saga = testSaga(signInFlow);
+    saga.next().take(signInRequest.type);
+    saga
+      .next({ type: 'test', payload: signInRequestPayload })
+      .fork(authenticateUser, signInRequestPayload);
+    saga.next().take([cancelSignIn.type, endSignIn.type]);
+    saga.next(endSignIn()).take(signInRequest.type); // back to the loop
+  });
 });

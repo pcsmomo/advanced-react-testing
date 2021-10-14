@@ -462,4 +462,11 @@ Implementation Details?
 - Write tests in src/app/component/nav/NavBar.test.tsx
 - Resist th urge to copy/paste!
 
+### 49. OPTIONAL: Redux State Code Quiz
+
+- Redux state tests for NavBar:
+  - "sign in" button when user is falsy
+  - "sign out" button and user email when user is truthy
+- Behaviour tests (look for elements on the page)
+
 </details>

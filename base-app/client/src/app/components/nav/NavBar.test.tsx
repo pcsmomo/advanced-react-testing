@@ -2,24 +2,48 @@ import { App } from '../../../App';
 import { fireEvent, render, screen } from '../../../test-utils';
 import { NavBar } from './NavBar';
 
-// Unit test
-test("Clicing sign-in button pushes '/signin' to history", () => {
-  const { history } = render(<NavBar />);
+describe('sign-in button nevigation', () => {
+  // Unit test
+  test("Clicing sign-in button pushes '/signin' to history", () => {
+    const { history } = render(<NavBar />);
 
-  const signInButton = screen.getByRole('button', { name: /sign in/i });
-  fireEvent.click(signInButton);
+    const signInButton = screen.getByRole('button', { name: /sign in/i });
+    fireEvent.click(signInButton);
 
-  expect(history.location.pathname).toBe('/signin');
+    expect(history.location.pathname).toBe('/signin');
+  });
+
+  // Behavior test
+  test('Clicking sign-in button shows sign-in page', () => {
+    render(<App />);
+
+    const signInButton = screen.getByRole('button', { name: /sign in/i });
+    fireEvent.click(signInButton);
+
+    expect(
+      screen.getByRole('heading', { name: /Sign in to your account/i })
+    ).toBeInTheDocument();
+  });
 });
 
-// Behavior test
-test('Clicking sign-in button shows sign-in page', () => {
-  render(<App />);
+describe('display when signed in / not signed in', () => {
+  test('display Sign In button when user is null', () => {
+    render(<NavBar />);
 
-  const signInButton = screen.getByRole('button', { name: /sign in/i });
-  fireEvent.click(signInButton);
+    expect(
+      screen.getByRole('button', { name: /sign in/i })
+    ).toBeInTheDocument();
+  });
 
-  expect(
-    screen.getByRole('heading', { name: /Sign in to your account/i })
-  ).toBeInTheDocument();
+  test('display Sign Out button and user email when user is trushy', () => {
+    const userDetails = {
+      email: 'test@test.com',
+    };
+    render(<NavBar />, { preloadedState: { user: { userDetails } } });
+
+    expect(
+      screen.getByRole('button', { name: /sign out/i })
+    ).toBeInTheDocument();
+    expect(screen.getByText(/test@test.com/)).toBeInTheDocument();
+  });
 });

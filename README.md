@@ -469,4 +469,20 @@ Implementation Details?
   - "sign out" button and user email when user is truthy
 - Behaviour tests (look for elements on the page)
 
+### 50. Custom router Summary
+
+- Choises and tradeoffs:
+  - providers in App, render App for all tests
+    - closer to user experience
+    - less control over tests
+  - providers in index.tsx, render components in tests
+    - opposite of above
+  - Wrap _ui_ in providers for custom render
+    - test _store_ for Redux
+    - test history (_memoryHistory_) for Router
+  - App "setup" properties to _render_ options object
+  - Return _history_ with _render_ return object
+  - Export * from @testing-library/react, overwrite with custom *render\*
+  - import from test-utils instead of @testing-library/react
+
 </details>

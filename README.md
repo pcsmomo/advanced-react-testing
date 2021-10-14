@@ -414,4 +414,26 @@ Winner: Wrap components. Faster, more tarted tests
   - https://redux.js.org/usage/writing-tests#components
   - which are based on testing library docs: https://testing-library.com/docs/react-testing-library/setup#custom-render
 
+### 45. Adding React Router to Custom render
+
+- Adding Router to custom render: https://testing-library.com/docs/example-react-router/
+- Create history using createMemoryHistory pass to test Router provider
+  - [memory](https://github.com/remix-run/history/blob/main/docs/api-reference.md#creatememoryhistory)
+  - _memoryHistory_: history independent of browser
+  - analogous to setting up test store for Redux
+- Add two more properties to _render_ options
+  - _routeHistory_: Array of routes (string)
+  - _initialRouteIndex_: where in the history to start
+    - default to last index of _routeHistory_
+- Eventually: make history accessible to tests for assertions
+
+#### import sorting
+
+```sh
+npm i eslint-plugin-simple-import-sort
+# and set up the eslint rule
+```
+
+###
+
 </details>

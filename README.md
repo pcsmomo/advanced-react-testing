@@ -450,4 +450,16 @@ Implementation Details?
     - also doesn't test user experience
 - Will demonstrate behavior test in the next lecture (optional)
 
+### 48. Code Quiz! history.push()
+
+- Effect is the same as _<Redicrect />_ so same test approach applies
+- Test NavBar push to _/signin_ on Sign in button push
+  - only _history.push_ instance that doesn't need fake server data
+- Test that clicking sign in button loads "/signin" url and page when user is _null_
+- Think about what to pass as options to custom render
+  - If any!
+- Try both styles of testing: unit testing and behavior testing
+- Write tests in src/app/component/nav/NavBar.test.tsx
+- Resist th urge to copy/paste!
+
 </details>

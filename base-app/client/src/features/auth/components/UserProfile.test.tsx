@@ -21,6 +21,7 @@ test('redirects to signin if user is falsy', () => {
   expect(history.location.pathname).toBe('/signin');
 });
 
+// Behaviour test
 test('view sign-in page when loading profile while not logging in', () => {
   render(<App />, { routeHistory: ['/profile'] });
   const heading = screen.getByRole('heading', {

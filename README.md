@@ -434,6 +434,20 @@ npm i eslint-plugin-simple-import-sort
 # and set up the eslint rule
 ```
 
-###
+### 46. Asserting on history Object
+
+Implementation Details?
+
+- Is this testing implementation details?
+- Relying on the structure of the history object
+- Alternate plan:
+  - render App with initial route set to /profile
+  - check actual text on page
+- Which is better?
+  - Testing code vs testing behavior
+  - User tradeoff:
+    - implementation details test is more targeted / more isolated,
+    - also doesn't test user experience
+- Will demonstrate behavior test in the next lecture (optional)
 
 </details>

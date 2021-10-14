@@ -14,7 +14,8 @@ test('greets the user', () => {
   ).toBeInTheDocument();
 });
 
-test('redirects if user is falsy', () => {
-  render(<UserProfile />);
-  expect(screen.queryByText(/hi/i)).not.toBeInTheDocument();
+test('redirects to signin if user is falsy', () => {
+  const { history } = render(<UserProfile />);
+  // console.log(history);
+  expect(history.location.pathname).toBe('/signin');
 });

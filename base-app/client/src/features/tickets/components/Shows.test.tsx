@@ -25,3 +25,25 @@ test('displays relavant show details for non-sold-out show', async () => {
   );
   expect(bandDescription).toBeInTheDocument();
 });
+
+test('displays relavant show details for sold-out show', async () => {
+  render(<Shows />);
+  const shows = await screen.findAllByRole('listitem');
+  const soldOutShow = shows[1];
+
+  const soldOutMessage = getByRole(soldOutShow, 'heading', {
+    name: /sold out/i,
+  });
+  expect(soldOutMessage).toBeInTheDocument();
+
+  const bandName = getByRole(soldOutShow, 'heading', {
+    name: /the joyous nun riot/i,
+  });
+  expect(bandName).toBeInTheDocument();
+
+  const bandDescription = getByText(
+    soldOutShow,
+    'serious world music with an iconic musical saw'
+  );
+  expect(bandDescription).toBeInTheDocument();
+});

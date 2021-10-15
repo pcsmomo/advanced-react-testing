@@ -485,4 +485,18 @@ Implementation Details?
   - Export * from @testing-library/react, overwrite with custom *render\*
   - import from test-utils instead of @testing-library/react
 
+## Section 6: Testing Routes with URL and Query Params
+
+### 52. OPTIONAL Introduction to Mock Service Worker
+
+- Mock Service Worker (MSW) mock responses from the server
+- Why not just mock seelctors?
+  - Also a viable option
+- Mocking server response is more flexible
+  - One server response could cover a veriety of selectors
+  - As long as data is covered, don't need to worry about selectors
+  - Tests more of your app
+    - Tests selectors (or, say RTK Query calls) which mocks do not
+  - Works if you change method of server call (e.g. fetch to axios)
+
 </details>

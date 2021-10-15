@@ -523,4 +523,15 @@ Implementation Details?
         - ctx: utility to build response
         - https://mswjs.io/docs/basics/response-resolver
 
+### 56. Testing a Route with URL Params
+
+- Test: band page _/bands/:bandId_ shows the proper content
+- Can't just render <Bands /> component
+  - URL param is only accessible from parent component render
+  - Even if we add, say, /bands/0 to the route history
+- Need to render App, not Bands
+- Set location in route history
+- Add bands handler to msw
+  - data comes from server
+
 </details>

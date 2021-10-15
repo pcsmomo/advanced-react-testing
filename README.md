@@ -499,4 +499,28 @@ Implementation Details?
     - Tests selectors (or, say RTK Query calls) which mocks do not
   - Works if you change method of server call (e.g. fetch to axios)
 
+### 53. OPTIONAL Setting up Mock Service Worker
+
+1. npm install msw
+2. Create handlers
+   - [https://](https://mswjs.io/docs/getting-started/mocks/rest-api)
+3. Create test server
+   - Associate with handlers
+   - Make sure test server listens during all tests
+   - Reset after each test
+   - https://mswjs.io/docs/getting-started/integrate/node
+
+#### Mock service Worker Handler
+
+`rest.get(showsUrl, (req, res, ctx) => {})`
+
+- Handler Type: rest or graphql
+  - HTTP method to mock: get, post, etc.
+    - Full URL to mock
+      - Response resolver function
+        - req: request object
+        - res: function to create response
+        - ctx: utility to build response
+        - https://mswjs.io/docs/basics/response-resolver
+
 </details>

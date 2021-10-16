@@ -617,4 +617,16 @@ Implementation Details?
 - What to render?
   - Checking for redirects, render _App_
 
+### 66. OPTIONAL: Introduction to Parametrization with test.each()
+
+- Run same test with different data using _test.each()_
+  - https://jestjs.io/docs/api#testeachtablename-fn-timeout
+- `test.each([argument object])(test name, test function)
+- _test.each_ takes an array of argument objects
+- Returns a function that works like _test_
+  - Takes test name and test function
+  - Test function takes argument from argument objests
+- Can use argument object properties in test name (e.g. "works with $name")
+  - ...when https://github.com/facebook/jest/pull/11388 is released
+
 </details>

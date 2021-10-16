@@ -579,4 +579,16 @@ Implementation Details?
   - What do you need to include in the route history?
   - What, if anything, do you need to include in the Redux store?
 
+### 63. Review: Routes with URL and Query Params
+
+- Use Mock Service Worker to responsd to server calls during tests
+  - Can tailor response to properties of request
+- Control route rendered for test:
+  - Specify URL params and query params in route history path
+  - Must render parent element for params to be available
+- Assert on pushed/redirected route:
+  - URL params in _location.pathname_
+  - Query params in _location.search_
+- Used Jest's _expect.stringMatching_ to match regex
+
 </details>

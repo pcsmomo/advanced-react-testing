@@ -534,4 +534,12 @@ Implementation Details?
 - Add bands handler to msw
   - data comes from server
 
+### 60. Redirecting to Route with URL Params
+
+- Test: clicking "Buy Tickets" from _shows_ pushes the correct /tickets/:showId URL
+  - unit test only here for pushed route
+  - could also do functional testing for page elements
+- Unit test is more specific to React Router
+  - More specific to this course
+
 </details>

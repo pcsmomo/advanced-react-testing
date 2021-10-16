@@ -28,4 +28,10 @@ export const handlers = [
       })
     );
   }),
+
+  // [MSW] Warning: captured a request without a matching request handler:
+  //     • PATCH http://localhost:3030/shows/0/hold/54267052
+  rest.patch(`${showsUrl}/:showId/hold/:holdId`, (req, res, ctx) => {
+    return res(ctx.status(200));
+  }),
 ];

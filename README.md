@@ -542,4 +542,27 @@ Implementation Details?
 - Unit test is more specific to React Router
   - More specific to this course
 
+### 61. Redirecting to Route with URL and Query Params
+
+#### New Router Location, Extended
+
+- Test: clicking "Purchase" from Tickets pushes the correct /confirm URL
+  - Seems simple, but actually quite complicated!
+- Need to account for
+  - _showId_ coming from URL param
+    - URL param is only accessible if we render parent component
+    - Need to render _App_, not _Tickets_
+- Auth protected: need user in Redux store
+- Show data comes from server; async rendering
+  - Need to make sure show is not sold out!
+
+#### Query String in Pushed Route
+
+- URL param located in _history.location.pathname_
+- Query string located _in history.location.search_
+  - https://reactrouter.com/web/api/location
+- Random hold ID in pushed URL query string
+  - `/conform/${showId}?holdId=${generatedRandomId()}&seatCount=${reservedSeatCount}`
+  - will match via regular expression
+
 </details>

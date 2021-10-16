@@ -565,4 +565,18 @@ Implementation Details?
   - `/conform/${showId}?holdId=${generatedRandomId()}&seatCount=${reservedSeatCount}`
   - will match via regular expression
 
+### 62. Code Quiz! Bad Query Params
+
+- Your goal: write a test that
+  - excludes _holdId_ in the query string
+  - assert that the app redirects to _/tickets/:showId_
+- For completeness should test when _seatCount_ is missing and when both are missing
+  - Completeness is not the objective of this course
+- Note, this is actually less complicated than the last test
+  - the query params are in the current route, not the pushed route!
+- Things to think about
+  - What do you need to render here?
+  - What do you need to include in the route history?
+  - What, if anything, do you need to include in the Redux store?
+
 </details>

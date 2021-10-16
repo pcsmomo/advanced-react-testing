@@ -601,7 +601,20 @@ Implementation Details?
   - If not logged in, auth-protected routes:
     - redirect to sign-in page
     - after login, redirect back to auth-protected route
-- Parametrize tests with test.each()
+- Parametrize tests with _test.each()_
   - same tests, different data
+
+### 65. Test for Non-Protected Route
+
+- Test by page heading
+  - Done a lot of router history tests
+  - Mix it up by asserting on what's showing on the page
+    - functional test / testing behavior
+- Where to put tests?
+  - will (eventually) parametrize with _test.each()_
+  - not to associated with any particular page
+  - put in _auth_ feature directory
+- What to render?
+  - Checking for redirects, render _App_
 
 </details>

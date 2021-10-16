@@ -591,4 +591,17 @@ Implementation Details?
   - Query params in _location.search_
 - Used Jest's _expect.stringMatching_ to match regex
 
+## Section 7: Testing Auth-Protected Routes
+
+### 64. Intro to Testing Auth-Protected Routes
+
+- Test that
+  - Non-protected routes never redirect to sign-in
+  - If logged in, auth-protected routes don't redirect
+  - If not logged in, auth-protected routes:
+    - redirect to sign-in page
+    - after login, redirect back to auth-protected route
+- Parametrize tests with test.each()
+  - same tests, different data
+
 </details>

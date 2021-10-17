@@ -629,4 +629,15 @@ Implementation Details?
 - Can use argument object properties in test name (e.g. "works with $name")
   - ...when https://github.com/facebook/jest/pull/11388 is released
 
+### 68. Planning Protected Route Tests
+
+- Fast behavior-based test for every protected route
+  - Redirect to sign-in if not signed in
+  - Don't redirect if signed in (Already part of other tests)
+- Slower behavior-based tests for only one route
+  - Redirect back to page after sign-in / sign-up
+  - Don't redirect after failed sign-in
+    - But do redirect for failed -> successful sign in
+- Need handler for sign-in / sign-in endpoints
+
 </details>

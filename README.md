@@ -640,4 +640,42 @@ Implementation Details?
     - But do redirect for failed -> successful sign in
 - Need handler for sign-in / sign-in endpoints
 
+### 72. Planning Tests for Protected Route Redirect after Sign-In
+
+#### Successful Sign-In Flow
+
+- Longer functional test with user flow:
+  - More the style recommended in this Kent C. Dodds post
+  - [Write fewer, longer tests
+    (https://kentcdodds.com/blog/write-fewer-longer-tests)](https://kentcdodds.com/blog/write-fewer-longer-tests)
+- Test steps:
+  1. Go to protected route
+  2. Redirect to sign in
+  3. Sign in (successfully, tahnks to handler!)
+     - Use user-event for easier entry
+     - https://testing-library.com/docs/ecosystem-user-event/
+  4. Test for redirect back to initial protected route
+     - with _/signin_ removed from history
+
+#### Test for Every Protected Route?
+
+- Test for all routes?
+  - Not necessary
+- We tested redirect for individual routes
+- Here we're testing flow mechanism
+  - All routes use same flow mechanism
+  - "White box" testing, but reasonable assumptions
+- Why not _test.each()_?
+  - **Long test, would slow down testing**
+
+#### Note on _waitFor_
+
+- _await findBy_\* allows async for page elements
+- _waitFor_ allows async for assertions
+- Requires Testing Library 10+
+- If you're getting this error:
+  - `TypeError: (0, \_testUtils.waitforElementToBeRemoved) is not a function
+- Run this command
+  - `npm install @testing-library/react@^10.0`
+
 </details>

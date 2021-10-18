@@ -13,7 +13,10 @@ test.each([
   expect(signInHeader).toBeInTheDocument();
 });
 
-test('successful sign-in flow', async () => {
+test.each([
+  { testName: 'sign in', buttonName: /sign in/i },
+  { testName: 'sign up', buttonName: /sign up/i },
+])('successful $testName flow', async ({ buttonName }) => {
   // go to protected page
   const { history } = render(<App />, { routeHistory: ['/tickets/1'] });
 
@@ -25,7 +28,7 @@ test('successful sign-in flow', async () => {
   userEvent.type(passwordField, 'iheartcheese');
 
   const signInForm = screen.getByTestId('sign-in-form');
-  const signInButton = getByRole(signInForm, 'button', { name: /sign in/i });
+  const signInButton = getByRole(signInForm, 'button', { name: buttonName });
   userEvent.click(signInButton);
 
   await waitFor(() => {

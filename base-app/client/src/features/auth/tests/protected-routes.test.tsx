@@ -57,73 +57,148 @@ const signInFailure = (
   ctx: RestContext
 ) => res(ctx.status(401));
 
-test('unsuccessful signin followed by successful signin', async () => {
-  const errorHandler = rest.post(
-    `${baseUrl}/${endpoints.signIn}`,
-    signInFailure
-  );
-  server.resetHandlers(errorHandler);
+// const signInError = (
+//   req: RestRequest<DefaultRequestBody, RequestParams>,
+//   res: ResponseComposition,
+//   ctx: RestContext
+// ) => res(ctx.status(500));
 
-  // go to protected page
-  const { history } = render(<App />, { routeHistory: ['/tickets/1'] });
-
-  // Sign in (after redirect)
-  const emailField = screen.getByLabelText(/email/i);
-  userEvent.type(emailField, 'booking@avalancheofcheese.com');
-
-  const passwordField = screen.getByLabelText(/password/i);
-  userEvent.type(passwordField, 'iheartcheese');
-
-  const signInForm = screen.getByTestId('sign-in-form');
-  const signInButton = getByRole(signInForm, 'button', { name: /sign in/i });
-  userEvent.click(signInButton);
-
-  // Reset to original one
-  server.resetHandlers();
-  userEvent.click(signInButton);
-
-  await waitFor(() => {
-    // test redirect back to protected page
-    expect(history.location.pathname).toBe('/tickets/1');
-
-    // sign-in page remove from history
-    expect(history.entries).toHaveLength(1);
-  });
-});
-
-const signInError = (
+const serverError = (
   req: RestRequest<DefaultRequestBody, RequestParams>,
   res: ResponseComposition,
   ctx: RestContext
 ) => res(ctx.status(500));
 
-test('signin server error followed by successful signin', async () => {
-  const errorHandler = rest.post(`${baseUrl}/${endpoints.signIn}`, signInError);
-  server.resetHandlers(errorHandler);
+const signUpFailure = (
+  req: RestRequest<DefaultRequestBody, RequestParams>,
+  res: ResponseComposition,
+  ctx: RestContext
+) => res(ctx.status(400), ctx.json({ message: 'Email is already in use' }));
 
-  // go to protected page
-  const { history } = render(<App />, { routeHistory: ['/tickets/1'] });
+test.each([
+  {
+    endpoint: endpoints.signIn,
+    outcome: 'failure',
+    responseResolver: signInFailure,
+    buttonNameRegex: /sign in/i,
+  },
+  {
+    endpoint: endpoints.signIn,
+    outcome: 'error',
+    responseResolver: serverError,
+    buttonNameRegex: /sign in/i,
+  },
+  {
+    endpoint: endpoints.signUp,
+    outcome: 'failure',
+    responseResolver: signUpFailure,
+    buttonNameRegex: /sign up/i,
+  },
+  {
+    endpoint: endpoints.signUp,
+    outcome: 'error',
+    responseResolver: serverError,
+    buttonNameRegex: /sign up/i,
+  },
+])(
+  '$endpoint $outcome followed by success',
+  async ({ endpoint, responseResolver, buttonNameRegex }) => {
+    // reset the handler to respond unsuccessfully
+    const errorHandler = rest.post(`${baseUrl}/${endpoint}`, responseResolver);
+    // server.resetHandlers(...handlers, errorHandler);
+    server.resetHandlers(errorHandler);
 
-  // Sign in (after redirect)
-  const emailField = screen.getByLabelText(/email/i);
-  userEvent.type(emailField, 'booking@avalancheofcheese.com');
+    // go to protected page
+    const { history } = render(<App />, { routeHistory: ['/tickets/1'] });
 
-  const passwordField = screen.getByLabelText(/password/i);
-  userEvent.type(passwordField, 'iheartcheese');
+    // Sign in (after redirect)
+    const emailField = screen.getByLabelText(/email/i);
+    userEvent.type(emailField, 'booking@avalancheofcheese.com');
 
-  const signInForm = screen.getByTestId('sign-in-form');
-  const signInButton = getByRole(signInForm, 'button', { name: /sign in/i });
-  userEvent.click(signInButton);
+    const passwordField = screen.getByLabelText(/password/i);
+    userEvent.type(passwordField, 'iheartcheese');
 
-  // Reset to original one
-  server.resetHandlers();
-  userEvent.click(signInButton);
+    const actionForm = screen.getByTestId('sign-in-form');
+    const actionButton = getByRole(actionForm, 'button', {
+      name: buttonNameRegex,
+    });
+    userEvent.click(actionButton);
 
-  await waitFor(() => {
-    // test redirect back to protected page
-    expect(history.location.pathname).toBe('/tickets/1');
+    // Reset to original one
+    server.resetHandlers();
+    userEvent.click(actionButton);
 
-    // sign-in page remove from history
-    expect(history.entries).toHaveLength(1);
-  });
-});
+    await waitFor(() => {
+      // test redirect back to protected page
+      expect(history.location.pathname).toBe('/tickets/1');
+
+      // sign-in page remove from history
+      expect(history.entries).toHaveLength(1);
+    });
+  }
+);
+
+// test('unsuccessful signin followed by successful signin', async () => {
+//   const errorHandler = rest.post(
+//     `${baseUrl}/${endpoints.signIn}`,
+//     signInFailure
+//   );
+//   server.resetHandlers(errorHandler);
+
+//   // go to protected page
+//   const { history } = render(<App />, { routeHistory: ['/tickets/1'] });
+
+//   // Sign in (after redirect)
+//   const emailField = screen.getByLabelText(/email/i);
+//   userEvent.type(emailField, 'booking@avalancheofcheese.com');
+
+//   const passwordField = screen.getByLabelText(/password/i);
+//   userEvent.type(passwordField, 'iheartcheese');
+
+//   const signInForm = screen.getByTestId('sign-in-form');
+//   const signInButton = getByRole(signInForm, 'button', { name: /sign in/i });
+//   userEvent.click(signInButton);
+
+//   // Reset to original one
+//   server.resetHandlers();
+//   userEvent.click(signInButton);
+
+//   await waitFor(() => {
+//     // test redirect back to protected page
+//     expect(history.location.pathname).toBe('/tickets/1');
+
+//     // sign-in page remove from history
+//     expect(history.entries).toHaveLength(1);
+//   });
+// });
+
+// test('signin server error followed by successful signin', async () => {
+//   const errorHandler = rest.post(`${baseUrl}/${endpoints.signIn}`, signInError);
+//   server.resetHandlers(errorHandler);
+
+//   // go to protected page
+//   const { history } = render(<App />, { routeHistory: ['/tickets/1'] });
+
+//   // Sign in (after redirect)
+//   const emailField = screen.getByLabelText(/email/i);
+//   userEvent.type(emailField, 'booking@avalancheofcheese.com');
+
+//   const passwordField = screen.getByLabelText(/password/i);
+//   userEvent.type(passwordField, 'iheartcheese');
+
+//   const signInForm = screen.getByTestId('sign-in-form');
+//   const signInButton = getByRole(signInForm, 'button', { name: /sign in/i });
+//   userEvent.click(signInButton);
+
+//   // Reset to original one
+//   server.resetHandlers();
+//   userEvent.click(signInButton);
+
+//   await waitFor(() => {
+//     // test redirect back to protected page
+//     expect(history.location.pathname).toBe('/tickets/1');
+
+//     // sign-in page remove from history
+//     expect(history.entries).toHaveLength(1);
+//   });
+// });

@@ -692,4 +692,16 @@ Unsuccessful Sign-In
   - https://mswjs.io/docs/api/setup-server/reset-handlers
   - cleaned up in setupTests.js _afterEach_
 
+### 79. Code Quiz! Parametrizing Unsuccessful Sign In / Sign Up
+
+- Parametrize test to cover all these cases:
+  - Sign in server error
+  - Sign in failure
+  - Sign up server error
+  - Sign up failure
+    - status 400
+    - message "email already in use"
+    - https://mswjs.io/docs/recipes/mocking-error-responses
+- What properties are needed in the parametrization array?
+
 </details>

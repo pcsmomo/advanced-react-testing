@@ -678,4 +678,18 @@ Implementation Details?
 - Run this command
   - `npm install @testing-library/react@^10.0`
 
+### 77. Testing Failed SignIn Followed by Successful SignIn
+
+Unsuccessful Sign-In
+
+- Simulate unsuccessfull sign-in by altering response from server
+- This lecture: failed login (bad username/password)
+- Code quiz: parametrize for
+  - server error
+  - sign-up failure
+  - sign-up server error
+- Defining handler response for one test:
+  - https://mswjs.io/docs/api/setup-server/reset-handlers
+  - cleaned up in setupTests.js _afterEach_
+
 </details>

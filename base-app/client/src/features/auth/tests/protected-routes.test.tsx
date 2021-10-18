@@ -1,6 +1,17 @@
 import userEvent from '@testing-library/user-event';
+import {
+  DefaultRequestBody,
+  RequestParams,
+  ResponseComposition,
+  rest,
+  RestContext,
+  RestRequest,
+} from 'msw';
 
 import { App } from '../../../App';
+import { baseUrl, endpoints } from '../../../app/axios/constants';
+import { handlers } from '../../../mocks/handlers';
+import { server } from '../../../mocks/server';
 import { getByRole, render, screen, waitFor } from '../../../test-utils';
 
 test.each([
@@ -29,6 +40,46 @@ test.each([
 
   const signInForm = screen.getByTestId('sign-in-form');
   const signInButton = getByRole(signInForm, 'button', { name: buttonName });
+  userEvent.click(signInButton);
+
+  await waitFor(() => {
+    // test redirect back to protected page
+    expect(history.location.pathname).toBe('/tickets/1');
+
+    // sign-in page remove from history
+    expect(history.entries).toHaveLength(1);
+  });
+});
+
+const signInFailure = (
+  req: RestRequest<DefaultRequestBody, RequestParams>,
+  res: ResponseComposition,
+  ctx: RestContext
+) => res(ctx.status(401));
+
+test('unsuccessful signin followed by successful signin', async () => {
+  const errorHandler = rest.post(
+    `${baseUrl}/${endpoints.signIn}`,
+    signInFailure
+  );
+  server.resetHandlers(errorHandler);
+
+  // go to protected page
+  const { history } = render(<App />, { routeHistory: ['/tickets/1'] });
+
+  // Sign in (after redirect)
+  const emailField = screen.getByLabelText(/email/i);
+  userEvent.type(emailField, 'booking@avalancheofcheese.com');
+
+  const passwordField = screen.getByLabelText(/password/i);
+  userEvent.type(passwordField, 'iheartcheese');
+
+  const signInForm = screen.getByTestId('sign-in-form');
+  const signInButton = getByRole(signInForm, 'button', { name: /sign in/i });
+  userEvent.click(signInButton);
+
+  // Reset to original one
+  server.resetHandlers();
   userEvent.click(signInButton);
 
   await waitFor(() => {

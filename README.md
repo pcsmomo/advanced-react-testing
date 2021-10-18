@@ -704,4 +704,15 @@ Unsuccessful Sign-In
     - https://mswjs.io/docs/recipes/mocking-error-responses
 - What properties are needed in the parametrization array?
 
+### 80. Review: Auth-Protected Routes
+
+- Test non-protected route (no redirect)
+- Test redirect to sign in for all protected routes
+  - parametrization very useful
+- Test successful sign in
+  - "expensive" test
+  - only one route
+- Test unsuccessful -> successful sign in / sign up
+  - MSW handlers control success or lack thereof!
+
 </details>

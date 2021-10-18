@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 
 import { App } from '../../../App';
-import { render, screen } from '../../../test-utils';
+import { getByRole, render, screen, waitFor } from '../../../test-utils';
 
 test.each([
   { route: '/profile' },
@@ -13,7 +13,7 @@ test.each([
   expect(signInHeader).toBeInTheDocument();
 });
 
-test('successful sign-in flow', () => {
+test('successful sign-in flow', async () => {
   // go to protected page
   const { history } = render(<App />, { routeHistory: ['/tickets/1'] });
 
@@ -24,12 +24,15 @@ test('successful sign-in flow', () => {
   const passwordField = screen.getByLabelText(/password/i);
   userEvent.type(passwordField, 'iheartcheese');
 
-  const signInButton = screen.getByRole('button', { name: /sign in/i });
+  const signInForm = screen.getByTestId('sign-in-form');
+  const signInButton = getByRole(signInForm, 'button', { name: /sign in/i });
   userEvent.click(signInButton);
 
-  // test redirect back to protected page
-  expect(history.location.pathname).toBe('/tickets/1');
+  await waitFor(() => {
+    // test redirect back to protected page
+    expect(history.location.pathname).toBe('/tickets/1');
 
-  // sign-in page remove from history
-  console.log(history);
+    // sign-in page remove from history
+    expect(history.entries).toHaveLength(1);
+  });
 });

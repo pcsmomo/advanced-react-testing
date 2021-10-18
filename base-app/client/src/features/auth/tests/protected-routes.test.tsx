@@ -90,3 +90,40 @@ test('unsuccessful signin followed by successful signin', async () => {
     expect(history.entries).toHaveLength(1);
   });
 });
+
+const signInError = (
+  req: RestRequest<DefaultRequestBody, RequestParams>,
+  res: ResponseComposition,
+  ctx: RestContext
+) => res(ctx.status(500));
+
+test('signin server error followed by successful signin', async () => {
+  const errorHandler = rest.post(`${baseUrl}/${endpoints.signIn}`, signInError);
+  server.resetHandlers(errorHandler);
+
+  // go to protected page
+  const { history } = render(<App />, { routeHistory: ['/tickets/1'] });
+
+  // Sign in (after redirect)
+  const emailField = screen.getByLabelText(/email/i);
+  userEvent.type(emailField, 'booking@avalancheofcheese.com');
+
+  const passwordField = screen.getByLabelText(/password/i);
+  userEvent.type(passwordField, 'iheartcheese');
+
+  const signInForm = screen.getByTestId('sign-in-form');
+  const signInButton = getByRole(signInForm, 'button', { name: /sign in/i });
+  userEvent.click(signInButton);
+
+  // Reset to original one
+  server.resetHandlers();
+  userEvent.click(signInButton);
+
+  await waitFor(() => {
+    // test redirect back to protected page
+    expect(history.location.pathname).toBe('/tickets/1');
+
+    // sign-in page remove from history
+    expect(history.entries).toHaveLength(1);
+  });
+});
